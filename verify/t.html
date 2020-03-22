@@ -21,27 +21,42 @@
         btn2.addEventListener('click', btn2Click);
         // btn3.addEventListener('click', btn3Click);
 
-        let tasks = [];
         let Task = {
             isLoaded: false,  //是否加载完
             tasks: [],  //任务队列
-            emit: function (fn) {
+
+            /**
+                加入队列重复判断
+             */
+            emit: function (id, fn) {
                 //如果已加载完毕则直接执行
                 if (this.isLoaded) {
                     fn()
                     return
                 }
 
+                //如果队列中已存在该任务，则不添加
+                if (this.hasTask(id)) {
+                    return
+                }
+
                 //未完全执行完则推入任务队列等待执行
-                this.tasks.push(fn);
+                this.tasks.push({
+                    id,
+                    fn
+                });
             },
             run: function () {
                 this.isLoaded = true;
                 this.tasks.forEach(task => {
-                    task()
+                    task.fn()
                 });
                 //清空队列
                 this.tasks = []
+            },
+            hasTask(id) {
+                let task = this.tasks.find(item => item.id === id);
+                return !!task
             }
         }
 
@@ -54,13 +69,13 @@
         }
 
         function btn2Click() {
-            Task.emit(() => {
+            Task.emit('btn2', () => {
                 console.info('btn2')
             })
         }
 
         function btn3Click() {
-            Task.emit(() => {
+            Task.emit('btn3', () => {
                 console.info('btn3')
             })
         }
