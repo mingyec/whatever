@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <button id="btn1">btn1</button>
+    <button id="btn2">btn2</button>
+    <!-- <button id="btn3">btn3</button> -->
+
+    <script>
+        let btn1 = document.getElementById('btn1')
+        let btn2 = document.getElementById('btn2')
+        // let btn3 = document.getElementById('btn3')
+
+        btn1.addEventListener('click', btn1Click);
+        btn2.addEventListener('click', btn2Click);
+        // btn3.addEventListener('click', btn3Click);
+
+        let tasks = [];
+        let Task = {
+            isLoaded: false,  //是否加载完
+            tasks: [],  //任务队列
+            emit: function (fn) {
+                //如果已加载完毕则直接执行
+                if (this.isLoaded) {
+                    fn()
+                    return
+                }
+
+                //未完全执行完则推入任务队列等待执行
+                this.tasks.push(fn);
+            },
+            run: function () {
+                this.isLoaded = true;
+                this.tasks.forEach(task => {
+                    task()
+                });
+                //清空队列
+                this.tasks = []
+            }
+        }
+
+        function btn1Click() {
+            console.info('btn1')
+            setTimeout(() => {
+                console.info('btn1 done')
+                Task.run()
+            }, 2000)
+        }
+
+        function btn2Click() {
+            Task.emit(() => {
+                console.info('btn2')
+            })
+        }
+
+        function btn3Click() {
+            Task.emit(() => {
+                console.info('btn3')
+            })
+        }
+    </script>
+</body>
+
+</html>
