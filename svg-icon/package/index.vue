@@ -1,11 +1,5 @@
 <template>
-    <svg
-        aria-hidden="true"
-        class="svg-icon"
-        :class="{'icon-loading': loading}"
-        :style="`width: ${size};height: ${size}`"
-        @click="click"
-    >
+    <svg aria-hidden="true" class="svg-icon" @click="click">
         <use v-bind:xlink:href="iconClass" />
     </svg>
 </template>
@@ -13,21 +7,10 @@
 <script>
 export default {
     props: {
+        // svg icon name
         icon: {
             type: String,
             required: true
-        },
-        className: {
-            type: String,
-            default: ""
-        },
-        loading: {
-            type: Boolean,
-            default: false
-        },
-        size: {
-            type: String,
-            default: "1em"
         }
     },
     computed: {
@@ -48,19 +31,10 @@ export default {
 
 <style scoped>
 .svg-icon {
+    width: 1em;
+    height: 1em;
     vertical-align: -0.15em;
     fill: currentColor;
     overflow: hidden;
-}
-.icon-loading {
-    animation: rotate 1s infinite linear;
-}
-@keyframes rotate {
-    0% {
-        transform: rotate(0deg);
-    }
-    100% {
-        transform: rotate(360deg);
-    }
 }
 </style>
