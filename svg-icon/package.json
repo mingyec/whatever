@@ -1,12 +1,24 @@
 {
-  "name": "svg-icon",
+  "name": "@mingyec/vue-svg-icon",
   "version": "0.1.0",
-  "private": true,
+  "description": "use svg icon for vue implementation",
+  "keywords": [
+    "svg",
+    "icon",
+    "svg icon",
+    "vue icon"
+  ],
   "scripts": {
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
-    "lint": "vue-cli-service lint"
+    "lint": "vue-cli-service lint",
+    "lib": "vue-cli-service build --target lib --name vue-svg-icon --dest lib package/index.js"
   },
+  "license": "MIT",
+  "contributors": [
+    "mingyec"
+  ],
+  "main": "lib/vue-svg-icon.umd.min.js",
   "dependencies": {
     "core-js": "^3.6.4",
     "vue": "^2.6.11"
@@ -18,8 +30,6 @@
     "babel-eslint": "^10.1.0",
     "eslint": "^6.7.2",
     "eslint-plugin-vue": "^6.2.2",
-    "node-sass": "^4.12.0",
-    "sass-loader": "^8.0.2",
     "svg-sprite-loader": "^5.0.0",
     "vue-template-compiler": "^2.6.11"
   },
