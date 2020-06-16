@@ -9,10 +9,11 @@ const { Node: ListNode } = require('./index.js');
  */
 
 /**
+ * 哈希表思路
  * @param {ListNode} head
  * @return {boolean}
  */
-const hasCycle = function(head) {
+const h = function(head) {
     const obj = new Map();
     let node = head;
     while (node) {
@@ -25,6 +26,27 @@ const hasCycle = function(head) {
     }
     return false
 };
+
+/**
+ * 快慢指针思路
+ * @param {ListNode} head
+ * @return {boolean}
+ */
+const hasCycle = function(head) {
+    if (!head) {
+        return false
+    }
+    let slow = head;
+    let fast = head.next && head.next.next;
+    while (fast && fast.next) {
+        if (fast === slow) {
+            return true
+        }
+        slow = slow.next;
+        fast = fast.next.next;
+    }
+    return false
+}
 
 module.exports = {
     hasCycle

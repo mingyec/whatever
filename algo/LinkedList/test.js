@@ -5,5 +5,10 @@ const { hasCycle } = require('./hasCycle')
 
 const linkedList = new LinkedList();
 linkedList.append(1)
+linkedList.append(2)
+
+const lastNode = linkedList.findByValue(2);
+const secondNode = linkedList.findByValue(1)
+lastNode.next = secondNode;
 
 console.info(hasCycle(linkedList.head.next))
