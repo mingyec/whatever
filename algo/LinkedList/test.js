@@ -1,14 +1,18 @@
 const { Node, LinkedList } = require('./index.js');
-const { hasCycle } = require('./hasCycle')
+const { middleNode } = require('./middleNode')
 
 // [11, 2, 1, 3, 4]
 
-const linkedList = new LinkedList();
-linkedList.append(1)
-linkedList.append(2)
+const l1 = new LinkedList();
+l1.append(1)
+l1.append(2)
+l1.append(4)
+l1.append(5)
 
-const lastNode = linkedList.findByValue(2);
-const secondNode = linkedList.findByValue(1)
-lastNode.next = secondNode;
+const l2 = new LinkedList();
+l2.append(1)
+l2.append(3)
+l2.append(4)
 
-console.info(hasCycle(linkedList.head.next))
+const a = middleNode(l1.head.next);
+console.info(a)
