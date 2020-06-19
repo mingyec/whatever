@@ -1,13 +1,17 @@
 import LoadingTemp from './Loading.vue';
 import Vue from 'vue';
+import { merge } from "./utils";
 
-// TODO 针对target的loading
 // TODO 替换加载图片
 
 const LoadingCtor = Vue.extend(LoadingTemp);
 
+// 全屏loading实例
+let fullscreenLoading;
+
 const defaults = {
     // 默认配置
+    body: false,
     fullscreen: true // 是否全屏
 };
 
@@ -20,7 +24,7 @@ LoadingCtor.prototype.close = function () {
 
 const Loading = (options = {}) => {
     // 合并参数
-    Object.assign(options, defaults);
+    options = merge(options, defaults)
 
     // target为css选择器时，转化为dom对象
     if (typeof options.target === 'string') {
@@ -36,19 +40,41 @@ const Loading = (options = {}) => {
         options.body = true;
     }
 
+    // 只维护一个全屏loading实例
+    if (options.fullscreen && fullscreenLoading) {
+        return fullscreenLoading
+    }
+
     // 确定挂载节点
     const parent = options.body ? document.body : options.target;
+
+    // const {height} = parent.getBoundingClientRect();
+    const height = parent.clientHeight;
 
     const ins = new LoadingCtor({
         el: document.createElement('div'),
         data: options
     });
 
+    // 设置样式
+    if (!options.body) {
+        parent.style.position = 'relative';
+        ins.$el.style.position = 'absolute';
+        ins.$el.style.height = height + 'px';
+    }
+    
+    ins.$el.style.left = '0'
+    ins.$el.style.top = '0'
+
     // 挂载节点
     parent.appendChild(ins.$el);
 
     // 调用即显示
     ins.visible = true;
+
+    if (options.fullscreen) {
+        fullscreenLoading = ins;
+    }
 
     return ins;
 };

@@ -1,6 +1,6 @@
 <template>
     <div id="app">
-        <img alt="Vue logo" src="./assets/logo.png" />
+        <!-- <img alt="Vue logo" src="./assets/logo.png" /> -->
         <div class="box">test</div>
     </div>
 </template>
@@ -9,9 +9,8 @@
 export default {
     name: "App",
     mounted() {
-        this.$loading({
-            target: '.box'
-        })
+        this.$loading()
+        this.$loading()
     }
 };
 </script>
