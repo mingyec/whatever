@@ -1,5 +1,5 @@
 const { Node, LinkedList } = require('./index.js');
-const { middleNode } = require('./middleNode')
+const { removeNthFromEnd } = require('./removeNthFromEnd')
 
 // [11, 2, 1, 3, 4]
 
@@ -14,5 +14,5 @@ l2.append(1)
 l2.append(3)
 l2.append(4)
 
-const a = middleNode(l1.head.next);
-console.info(a)
+const a = removeNthFromEnd(l1.head.next, 4);
+l1.display()
