@@ -3,6 +3,7 @@ import Vue from 'vue';
 import { merge } from "./utils";
 
 // TODO 替换加载图片
+// TODO 最少loading时长 minDur添加
 
 const LoadingCtor = Vue.extend(LoadingTemp);
 
@@ -19,6 +20,13 @@ const defaults = {
  * 关闭loading
  */
 LoadingCtor.prototype.close = function () {
+    // 动画结束后销毁组件
+    setTimeout(() => {
+        if (this.$el && this.$el.parentNode) {
+            this.$el.parentNode.removeChild(this.$el);
+        }
+        this.$destroy()
+    }, 500);
     this.visible = false;
 };
 

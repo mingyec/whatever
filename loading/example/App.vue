@@ -9,8 +9,10 @@
 export default {
     name: "App",
     mounted() {
-        this.$loading()
-        this.$loading()
+        const loading = this.$loading()
+        setTimeout(() => {
+            loading.close()
+        }, 3000);
     }
 };
 </script>

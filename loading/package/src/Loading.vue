@@ -1,6 +1,8 @@
 <template>
     <transition name="fade">
-        <div v-show="visible" class="loading-container">
+        <div v-show="visible" class="loading-container" :style="{
+            background: bgColor
+        }">
             <span class="loading-inner">
                 <svg class="loading" viewBox="25 25 50 50">
                     <circle cx="50" cy="50" r="20" fill="none" class="loading-circle" />
@@ -15,6 +17,7 @@ export default {
     data() {
         return {
             visible: false,
+            bgColor: 'rgba(255, 255, 255, 0.9)'
         };
     }
 };
