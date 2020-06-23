@@ -2,24 +2,32 @@ import LoadingTemp from './Loading.vue';
 import Vue from 'vue';
 import { merge } from "./utils";
 
-// TODO 替换加载图片
+// TODO 可替换中心的loading，改成render函数方式，接受一个slot
 // TODO 最少loading时长 minDur添加
+// TODO 锁定背景滚动
 
 const LoadingCtor = Vue.extend(LoadingTemp);
 
 // 全屏loading实例
 let fullscreenLoading;
 
+// 默认配置
 const defaults = {
-    // 默认配置
     body: false,
-    fullscreen: true // 是否全屏
+    fullscreen: true, // 是否全屏
+    target: undefined,
+    lock: true, // 默认锁定
+    gif: undefined, // 图片，可用于替换loading部分
+    minDur: 0 // 最少loading时长, 单位毫秒
 };
 
 /**
  * 关闭loading
  */
 LoadingCtor.prototype.close = function () {
+    if (fullscreenLoading) {
+        fullscreenLoading = undefined;
+    }
     // 动画结束后销毁组件
     setTimeout(() => {
         if (this.$el && this.$el.parentNode) {
@@ -32,7 +40,9 @@ LoadingCtor.prototype.close = function () {
 
 const Loading = (options = {}) => {
     // 合并参数
+    console.info(options)
     options = merge(options, defaults)
+    console.info(options)
 
     // target为css选择器时，转化为dom对象
     if (typeof options.target === 'string') {

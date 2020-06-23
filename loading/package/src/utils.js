@@ -1,5 +1,3 @@
-export const getStyle = function(element, styleName) {}
-
 /**
  * 合并多个值到target
  * @param {*} target 

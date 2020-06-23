@@ -2,8 +2,9 @@
     <transition name="fade">
         <div v-show="visible" class="loading-container" :style="{
             background: bgColor
-        }">
-            <span class="loading-inner">
+        }" @touchmove.prevent>
+            <img v-if="gif" :src="gif" alt="loading">
+            <span v-else class="loading-inner">
                 <svg class="loading" viewBox="25 25 50 50">
                     <circle cx="50" cy="50" r="20" fill="none" class="loading-circle" />
                 </svg>
@@ -17,9 +18,10 @@ export default {
     data() {
         return {
             visible: false,
+            gif: null,
             bgColor: 'rgba(255, 255, 255, 0.9)'
         };
-    }
+    },
 };
 </script>
 

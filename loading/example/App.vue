@@ -9,7 +9,9 @@
 export default {
     name: "App",
     mounted() {
-        const loading = this.$loading()
+        const loading = this.$loading({
+            gif: require('./assets/logo.png')
+        })
         setTimeout(() => {
             loading.close()
         }, 3000);
@@ -25,6 +27,7 @@ export default {
     text-align: center;
     color: #2c3e50;
     margin-top: 60px;
+    height: 150vh;
 
     .box {
         margin: 0 auto;
