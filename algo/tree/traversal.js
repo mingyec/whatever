@@ -151,3 +151,25 @@ var levelOrder = function (root) {
         }
     }
 };
+
+levelOrder = function (root) {
+    const arr = []
+    if (!root) {
+        return arr;
+    }
+    // 创建队列
+    const q = [root];
+    while (q.length > 0) {
+        const len = q.length; // 缓存当前队列长度
+        arr.push([]); // 当前层级预先进队
+        for (let i = 1; i <= len; i++) {
+            const node = q.shift();
+            // 取当前层级节点，推入数组
+            arr[arr.length - 1].push(node.val)
+            // 如果左/右节点存在，则入队
+            node.left && q.push(node.left);
+            node.right && q.push(node.right);
+        }
+    }
+    return arr;
+}
