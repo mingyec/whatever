@@ -27,3 +27,20 @@ var maxDepth = function (root) {
     fn(root, 1);
     return a;
 };
+
+maxDepth = function (root) {
+    if (root === null) {
+        return 0
+    }
+    let max = 0;
+    const fn = (r, level) => {
+        // 叶子节点
+        if (!r.left && !r.right) {
+            max = Math.max(max, level);
+        }
+        r.left && fn(r.left, level + 1)
+        r.right && fn(r.right, level + 1);
+    }
+    fn(root, 1)
+    return max;
+}
