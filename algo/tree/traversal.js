@@ -173,3 +173,20 @@ levelOrder = function (root) {
     }
     return arr;
 }
+
+// DFS解法
+levelOrder = function (root) {
+    if (root === null) return [];
+    const arr = []
+    const fn = (level, r) => {
+        // 如果当前层级未初始化，则初始化
+        if (!arr[level]) {
+            arr[level] = []
+        }
+        arr[level].push(r.val);
+        r.left && fn(level + 1, r.left);
+        r.right && fn(level + 1, r.right);
+    }
+    fn(0, root);
+    return arr;
+}
