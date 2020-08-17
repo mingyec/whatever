@@ -3,7 +3,7 @@
  * @param {string} s
  * @return {boolean}
  */
-isValid = function(s) {
+isValid = function (s) {
     const size = s.length;
     // 奇数则肯定无效
     if (size % 2) {
@@ -40,6 +40,24 @@ isValid = function(s) {
         }
     }
     return arr.length === 0;
+}
+
+
+isValid = function (s) {
+    const map = {
+        '}': '{',
+        ']': '[',
+        ')': '('
+    }
+    const stack = [];
+    for (const char of s) {
+        if (!map[char]) {
+            stack.push(char)
+        } else if (!stack.length || map[char] !== stack.pop()) {
+            return false
+        }
+    }
+    return !stack.length
 }
 
 console.info(isValid("{}{}"))
