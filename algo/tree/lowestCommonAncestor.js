@@ -56,3 +56,19 @@ lowestCommonAncestor = function (root, p, q) {
     fn(root)
     return ans;
 }
+
+lowestCommonAncestor = function (root, p, q) {
+    // root为空，或直接等于p或q时直接返回当前节点
+    if (root === null || root === p || root === q) {
+        return root
+    }
+    const left = lowestCommonAncestor(root.left, p, q);
+    const right = lowestCommonAncestor(root.right, p, q);
+    if (left === null) {
+        return right
+    }
+    if (right === null) {
+        return left;
+    }
+    return root;
+}

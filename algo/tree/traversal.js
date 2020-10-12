@@ -190,3 +190,22 @@ levelOrder = function (root) {
     fn(0, root);
     return arr;
 }
+
+levelOrder = function (root) {
+    let result = []
+    if (!root) return result;
+    // 创建队列
+    let q = [root]
+    while (q.length > 0) {
+        const len = q.length;
+        result.push([])
+        for (let i = 0; i < len; i++) {
+            const node = q.shift()
+            // 取当前层级节点
+            result[len - 1].push(node.val);
+            node.left && q.push(node.left);
+            node.right && q.push(node.right)
+        }
+    }
+    return result;
+}
