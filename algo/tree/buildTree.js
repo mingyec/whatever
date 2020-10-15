@@ -92,3 +92,21 @@ var buildTree = function (preorder, inorder) {
     root.right = buildTree(preorderRightArr, inorderRightArr);
     return root;
 };
+
+buildTree = function (preorder, inorder) {
+    if (!preorder.length) return null;
+    // 获取根节点
+    const rVal = preorder[0];
+    // 获取根节点对应的中序遍历位置
+    const index = inorder.indexOf(rVal);
+    // 创建根节点
+    const root = new TreeNode(rVal);
+    // 根据根节点区分左右子树（不包含根节点）
+    const leftArr = inorder.slice(0, index);
+    const rightArr = inorder.slice(index + 1);
+    const leftPreArr = preorder.slice(1, index + 1);
+    const rightPreArr = preorder.slice(index + 1);
+    root.left = buildTree(leftPreArr, leftArr);
+    root.right = buildTree(rightPreArr, rightArr);
+    return root
+}
